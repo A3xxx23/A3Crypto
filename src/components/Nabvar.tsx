@@ -1,10 +1,14 @@
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import Auth from "./Auth";
+import { IconMenu2, IconX } from "@tabler/icons-react";
 
 
 const navbarLinks = [
-  { id: 1, title: 'CSV to PDF', href: '/csv-to-pdf' },
-  { id: 2, title: 'Docx to PDF', href: '/docx-to-pdf' },
-  { id: 3, title: 'PDF to Docx', href: '/pdf-to-docx' },
-  { id: 4, title: 'HTML to PDF', href: '/html-to-pdf' },
+  { id: 1, title: 'Home', href: '/' },
+  { id: 2, title: 'Calculator', href: '/calculator' },
+  { id: 3, title: 'Trending', href: '/trending' },
+  { id: 4, title: 'News', href: '/news' },
 ];
 
 export const Navbar = () => {
@@ -14,7 +18,7 @@ export const Navbar = () => {
     <header className="w-full py-4 px-6 lg:px-1 text-white shadow-lg relative z-50">
       <div className="flex items-center justify-between">
         <Link to="/" className="flex-shrink-0 ">
-          <img src="/convertImage.png" alt="FileConverter logo" className="h-12" />
+          <img src="/src/assets/Image/LogoHero.png" alt="Logo crypto" className="h-16" />
         </Link>
 
         {/* Desktop Links */}
@@ -52,7 +56,7 @@ export const Navbar = () => {
       {menuOpen && (
         <div className="fixed inset-0 bg-white bg-opacity-95 flex flex-col items-center justify-center space-y-6 text-xl z-40">
         <Link to="/" className="flex justify-items-center py-4 ">
-          <img src="/convertImage.png" alt="FileConverter logo" className="h-26" />
+          <img src="/src/assets/Image/LogoHero.png" alt="Logo crypto" className="h-26" />
         </Link>
 
         <button
@@ -81,8 +85,4 @@ export const Navbar = () => {
   );
 };
 
-
-  )
-};
-
-export default Nabvar
+export default Navbar;
