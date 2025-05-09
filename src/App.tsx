@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 
-import Calculator from "./components/Calculator";
-import Trending from "./components/Trending";
-import News from "./components/News";
+import Calculator from "./pages/Calculator";
+import Trending from "./pages/Trending";
+import News from "./pages/News";
 import Nabvar from "./components/Nabvar";
 
 export const App = () => {

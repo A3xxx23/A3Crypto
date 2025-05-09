@@ -3,7 +3,7 @@ export const Hero = () => {
   return (
     <main className="flex-1 flex flex-col items-center justify-center text-center px-4 py-10">
     <img
-          src="/src/assets/Image/LogoHero.png"
+          src="/src/assets/Image/LogoCoin.png"
           alt="Logo Crypto"
           className="mb-4 h-26"
         />
