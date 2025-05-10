@@ -26,26 +26,35 @@ export const News = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch('/api/posts/?auth_token=950119400e3105dc16a70de3c3486c9c26e4da91')
-    .then((response) => response.json())
-    .then((data) => {
-      setNews(data.results);
-      setLoading(false);
-    })
-    .catch((error) => {
-      console.error('error fetching news:', error);
-      setLoading(false);
-    })
-  }, [])
 
-  if (loading) {
+  const fetchNewsCoins = () => {
+    fetch('/api/posts/?auth_token=950119400e3105dc16a70de3c3486c9c26e4da91')
+      .then((response) => response.json())
+      .then((data) => {
+        setNews(data.results);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('error fetching news:', error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchNewsCoins(); // Llama a la función para obtener datos inmediatamente
+
+    const intervalId = setInterval(fetchNewsCoins, 600000); // Actualiza cada 10 minutos
+
+    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
+  }, []);
+
+    if (loading) {
     return <Loader/>
   }
 
   return (
-    <div className="">
-      <h1 className="text-5xl font-bold text-center mb-10">News</h1>
+    <div className="container mx-auto max-w-7xl p-4">
+      <h1 className="text-6xl font-bold text-center mb-10">News</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 gap-y-4">
         {news.map((item) => (
           <div
