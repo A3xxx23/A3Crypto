@@ -42,7 +42,7 @@ export const Trending = () => {
   useEffect(() => {
     fetchTrendingCoins(); // Llama a la función para obtener datos inmediatamente
 
-    const intervalId = setInterval(fetchTrendingCoins, 600000); // Actualiza cada 10 minutos
+    const intervalId = setInterval(fetchTrendingCoins, 300000); // Actualiza cada 5 minutos
 
     return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, []);
