@@ -5,6 +5,7 @@ import Calculator from "./pages/Calculator";
 import Trending from "./pages/Trending";
 import News from "./pages/News";
 import Nabvar from "./components/Nabvar";
+import Crypto from "./components/Crypto";
 
 export const App = () => {
   return (
@@ -17,6 +18,7 @@ export const App = () => {
         <Route path="/calculator" element={< Calculator/>} />
         <Route path="/trending" element={< Trending/>} />
         <Route path="/news" element={< News/>} />
+        <Route path="/crypto/:id" element={<Crypto/>} />
       </Routes>
     </main>
   </div>
