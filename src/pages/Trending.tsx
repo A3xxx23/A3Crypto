@@ -71,7 +71,7 @@ export const Trending = () => {
           </div>
 
           <div className="flex items-center justify-center flex-col mt-3 gap-2">
-              <h3 className="text-2xl font-bold text-white">{item.name} {item.symbol}</h3>
+              <h3 className="text-2xl font-bold text-white tracking-tighter text-center">{item.name} {item.symbol}</h3>
               <p className="text-stone-500 font-light text-sm">Rank: {item.market_cap_rank}</p>
           </div>
 
