@@ -72,7 +72,7 @@ export const Table = ({ searchTerm }: Props) => {
 
 
     return (
-        <table className="mt-12 w-full max-w-xl mx-auto border border-white/10 bg-white/3 rounded-lg overflow-hidden transition-shadow duration-300">
+        <table className="mt-12 w-full max-w-xl mx-auto border border-white/10 bg-white/5 rounded-lg overflow-hidden transition-shadow duration-300">
     <thead className=" rounded-t-lg">
         <tr className="text-center">
             <th className="px-4 py-2">Cryptocurrency</th>

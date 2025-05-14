@@ -31,7 +31,7 @@ export const Hero = () => {
                     value={searchTerm}
                     onChange={handleSearch}
                     placeholder="Search crypto..."
-                    className="w-full p-2 sm:p-5 bg-white/4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-600 text-lg" 
+                    className="w-full p-2 sm:p-5 bg-white/5 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-600 text-lg" 
                 />
                 <button className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 text-gray-500 hover:text-gray-600">
                     <IconSearch className="text-2xl" />
