@@ -16,7 +16,7 @@ interface CryptoOption {
 };
 
 export const CalculatorCard = () => {
-    const [amount, setAmount] = useState<number>(0);
+    const [amount, setAmount] = useState<number | string>(0);
     const [fiat, setFiat] = useState<FiatOption | null>(null);
     const [crypto, setCrypto] = useState<CryptoOption | null>(null);
     const [cryptoOptions, setCryptoOptions] = useState<CryptoOption[]>([]);
@@ -73,8 +73,8 @@ export const CalculatorCard = () => {
                     if (price) {
                         setCryptoPrice(price);
                         if (updateTime) {
-                            const date = new Date(updateTime * 1000); 
-                            setLastUpdate(date.toLocaleString()); 
+                            const date = new Date(updateTime * 1000);
+                            setLastUpdate(date.toLocaleString());
                         }
                     } else {
                         toast.error('Error fetching crypto price', { position: 'bottom-right', duration: 3000 });
@@ -90,10 +90,13 @@ export const CalculatorCard = () => {
     }, [crypto]);
 
     useEffect(() => {
-        if (amount > 0 && fiat && cryptoPrice) {
-            const result = amount * cryptoPrice; 
+        const numericAmount = parseFloat(amount as string);
+        if (!isNaN(numericAmount) && numericAmount > 0 && fiat && cryptoPrice) {
+            const result = numericAmount * cryptoPrice;
             setConverted(result);
             toast.success(`Converted to ${fiat.label}`, { position: 'bottom-right', duration: 3000 });
+        } else {
+            setConverted(null); // Reset converted value if amount is invalid
         }
     }, [amount, fiat, cryptoPrice]);
 
@@ -125,7 +128,7 @@ export const CalculatorCard = () => {
             <input
                 value={amount}
                 min={0}
-                onChange={(e) => setAmount(parseFloat(e.target.value))}
+                onChange={(e) => setAmount(e.target.value)} // Cambiar a string para manejar el input
                 type="number"
                 className="w-full p-3 bg-white/0 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-600 text-lg text-stone-400"
                 placeholder="Enter amount"
@@ -213,13 +216,13 @@ export const CalculatorCard = () => {
             </div>
 
             {converted !== null && fiat && (
-                <div className="text-white text-xl mt-4 text-center">
+                <div className="text-gray-400 text-xl mt-4 text-center">
                     {amount} {crypto?.label} = <span className="font-bold text-green-400">{converted.toFixed(2)}</span> {fiat.label}
                 </div>
             )}
 
             {lastUpdate && (
-                <div className="text-white text-sm mt-2 text-center">
+                <div className="text-gray-400 text-sm mt-2 text-center">
                     Last updated: <span className="font-bold">{lastUpdate}</span>
                 </div>
             )}
@@ -228,3 +231,4 @@ export const CalculatorCard = () => {
 };
 
 export default CalculatorCard;
+
