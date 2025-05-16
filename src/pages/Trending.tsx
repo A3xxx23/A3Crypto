@@ -58,7 +58,7 @@ export const Trending = () => {
       {
         trending.map(({item}) => (
           <div 
-          className='"bg-white/5 shadow-md rounded-lg p-4 flex flex-col justify-between border border-white/10 hover:bg-white/10 transition-shadow duration-300'
+          className='bg-white/5 shadow-md rounded-lg p-4 flex flex-col justify-between border border-white/10 hover:bg-white/10 transition-shadow duration-300'
           key={item.id}
           >
           
