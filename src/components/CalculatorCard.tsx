@@ -59,6 +59,10 @@ export const CalculatorCard = () => {
 
     useEffect(() => {
         fetchCoin();
+
+        const intervalId = setInterval(fetchCoin, 100000); // Actualiza cada 1 minuto
+
+    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
     }, []);
 
     useEffect(() => {
@@ -86,6 +90,10 @@ export const CalculatorCard = () => {
             };
 
             fetchCryptoPrice();
+
+            const intervalId = setInterval(fetchCryptoPrice, 100000); // Actualiza cada 1 minuto
+
+    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
         }
     }, [crypto]);
 
