@@ -48,7 +48,6 @@ export const CalculatorCard = () => {
                 image: coin.image,
             }));
             setCryptoOptions(options);
-            console.log(options);
         } catch (error) {
             console.error(error);
             toast.error('Error fetching data', { position: 'bottom-right', duration: 3000 });
@@ -60,7 +59,7 @@ export const CalculatorCard = () => {
     useEffect(() => {
         fetchCoin();
 
-        const intervalId = setInterval(fetchCoin, 100000); // Actualiza cada 1 minuto
+        const intervalId = setInterval(fetchCoin, 600000); // Actualiza cada 10 minutos (600000 milisegundos)
 
     return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
     }, []);
@@ -91,7 +90,7 @@ export const CalculatorCard = () => {
 
             fetchCryptoPrice();
 
-            const intervalId = setInterval(fetchCryptoPrice, 100000); // Actualiza cada 1 minuto
+            const intervalId = setInterval(fetchCryptoPrice, 600000); // Actualiza cada 10 minuto
 
     return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
         }

@@ -43,7 +43,7 @@ export const News = () => {
   useEffect(() => {
     fetchNewsCoins(); // Llama a la función para obtener datos inmediatamente
 
-    const intervalId = setInterval(fetchNewsCoins, 100000); // Actualiza cada 1 minuto
+    const intervalId = setInterval(fetchNewsCoins, 600000); // Actualiza cada 10 minutos
 
     return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, []);

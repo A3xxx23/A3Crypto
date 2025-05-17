@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 
-export const Crypto = () => {
+export const Crypto= () => {
 
-    const { id } = useParams();
+    const { id } = useParams(); 
     console.log(id);
     
     return (
         <div>
-            <h1>Crypto</h1>
+            <h1>{id}</h1>
         </div>
     )
 }

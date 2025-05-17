@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
+import { useNavigate } from "react-router-dom";
 
 type TrendingCoin = {
   item: {
@@ -22,7 +23,8 @@ type TrendingCoin = {
 };
 
 export const Trending = () => {
-  
+
+  const navigate = useNavigate();
   const [trending, setTrending] = useState<TrendingCoin[]>([]);
   const [loading, setLoading] = useState(true);
   
@@ -42,7 +44,7 @@ export const Trending = () => {
   useEffect(() => {
     fetchTrendingCoins(); // Llama a la función para obtener datos inmediatamente
 
-    const intervalId = setInterval(fetchTrendingCoins, 100000); // Actualiza cada 1 minuto
+    const intervalId = setInterval(fetchTrendingCoins, 600000); // Actualiza cada 10 minuto
 
     return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
   }, []);
@@ -50,6 +52,10 @@ export const Trending = () => {
     if (loading) {
       return <Loader/>
     }
+
+    const handleSlugClick = (id: string) => {
+      navigate(`/crypto/${id}`);
+  };
 
   return (
     <div className="container mx-auto max-w-7xl p-4">
@@ -60,6 +66,7 @@ export const Trending = () => {
           <div 
           className='bg-white/5 shadow-md rounded-lg p-4 flex flex-col justify-between border border-white/10 hover:bg-white/10 transition-shadow duration-300'
           key={item.id}
+          onClick={() => handleSlugClick(item.slug)}
           >
           
           <div className="flex items-center justify-center gap-4">
