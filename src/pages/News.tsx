@@ -82,7 +82,7 @@ export const News = () => {
           >
             <img
               src={item.urlToImage || placeholderImage} // Usar el placeholder si no hay imagen
-              alt={item.title}
+              alt={item.title} 
               className="h-48 w-full object-cover rounded-t-lg mb-4"
               onError={(e) => { e.currentTarget.src = placeholderImage; }} // Manejo de error
             />
