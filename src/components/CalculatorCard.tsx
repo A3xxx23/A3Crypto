@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import toast from "react-hot-toast";
 import Select from "react-select";
 import Loader from "./Loader";
+import { useCalculatorStore } from "../store/useCalculatorStore";
 
 interface FiatOption {
     value: string;
@@ -9,21 +10,23 @@ interface FiatOption {
     image: string;
 };
 
-interface CryptoOption {
-    value: string;
-    label: string;
-    image: string;
-};
-
 export const CalculatorCard = () => {
-    const [amount, setAmount] = useState<number | string>(0);
-    const [fiat, setFiat] = useState<FiatOption | null>(null);
-    const [crypto, setCrypto] = useState<CryptoOption | null>(null);
-    const [cryptoOptions, setCryptoOptions] = useState<CryptoOption[]>([]);
-    const [converted, setConverted] = useState<number | null>(null);
-    const [cryptoPrice, setCryptoPrice] = useState<number | null>(null);
-    const [lastUpdate, setLastUpdate] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const {
+        amount,
+        fiat,
+        crypto,
+        cryptoOptions,
+        converted,
+        cryptoPrice,
+        lastUpdate,
+        setAmount,
+        setFiat,
+        setCrypto,
+        setCryptoOptions,
+        setConverted,
+        setCryptoPrice,
+        setLastUpdate,
+    } = useCalculatorStore();
 
     const fiatOptions: FiatOption[] = [
         { value: "usd", label: "US Dollar (USD)", image: 'https://flagcdn.com/us.svg' },
@@ -36,8 +39,7 @@ export const CalculatorCard = () => {
         { value: "gbp", label: "British Pound (GBP)", image: 'https://flagcdn.com/gb.svg' },
     ];
 
-    const fetchCoin = async () => {
-        setLoading(true);
+    const fetchCoin = useCallback(async () => {
         try {
             const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=false');
             const data = await response.json();
@@ -51,18 +53,16 @@ export const CalculatorCard = () => {
         } catch (error) {
             console.error(error);
             toast.error('Error fetching data', { position: 'bottom-right', duration: 3000 });
-        } finally {
-            setLoading(false);
         }
-    };
+    }, [setCryptoOptions]);
 
     useEffect(() => {
         fetchCoin();
 
-        const intervalId = setInterval(fetchCoin, 600000); // Actualiza cada 10 minutos (600000 milisegundos)
+        const intervalId = setInterval(fetchCoin, 600000); // Actualiza cada 10 minutos
 
-    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
-    }, []);
+        return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
+    }, [fetchCoin]); 
 
     useEffect(() => {
         if (crypto) {
@@ -90,11 +90,11 @@ export const CalculatorCard = () => {
 
             fetchCryptoPrice();
 
-            const intervalId = setInterval(fetchCryptoPrice, 600000); // Actualiza cada 10 minuto
+            const intervalId = setInterval(fetchCryptoPrice, 600000); // Actualiza cada 10 minutos
 
-    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
+            return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
         }
-    }, [crypto]);
+    }, [crypto, setCryptoPrice, setLastUpdate]); 
 
     useEffect(() => {
         const numericAmount = parseFloat(amount as string);
@@ -105,7 +105,7 @@ export const CalculatorCard = () => {
         } else {
             setConverted(null); // Reset converted value if amount is invalid
         }
-    }, [amount, fiat, cryptoPrice]);
+    }, [amount, fiat, cryptoPrice, setConverted]); // Agregar setConverted como dependencia
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const customSingleValue = ({ data }: any) => (
@@ -126,8 +126,12 @@ export const CalculatorCard = () => {
         );
     };
 
-    if (loading) {
-        return <Loader />;
+    if (cryptoOptions.length === 0) {
+        return (
+            <div className="flex justify-center items-center ">
+                <Loader />
+            </div>
+        );
     }
 
     return (
@@ -145,7 +149,7 @@ export const CalculatorCard = () => {
                 <Select
                     options={fiatOptions}
                     value={fiat}
-                    onChange={(value) => setFiat(value)}
+                    onChange={(value) => setFiat(value)} // Usar el setter de Zustand
                     isSearchable={true}
                     isClearable={true}
                     components={{ SingleValue: customSingleValue, Option: customOption }}
@@ -185,7 +189,7 @@ export const CalculatorCard = () => {
                 <Select
                     options={cryptoOptions}
                     value={crypto}
-                    onChange={(value) => setCrypto(value)}
+                    onChange={(value) => setCrypto(value)} // Usar el setter de Zustand
                     isLoading={cryptoOptions.length === 0}
                     components={{ SingleValue: customSingleValue, Option: customOption }}
                     isSearchable={true}
@@ -238,4 +242,3 @@ export const CalculatorCard = () => {
 };
 
 export default CalculatorCard;
-
