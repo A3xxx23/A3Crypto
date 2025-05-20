@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://cryptopanic.com/api/v1',
+        target: 'https://api.coingecko.com',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
