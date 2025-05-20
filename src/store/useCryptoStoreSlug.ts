@@ -6,10 +6,8 @@ type CoinDetails = {
   name: string;
   symbol: string;
   image: { large: string };
-  genesis_date: string;
   watchlist_portfolio_users: number;
-  high_24h: number;
-  low_24h: number;
+  sentiment_votes_up_percentage: number;
   market_cap_rank: number;
   market_data: {
     current_price: { usd: number };

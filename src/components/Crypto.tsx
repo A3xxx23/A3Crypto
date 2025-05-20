@@ -139,12 +139,6 @@ export const Crypto = () => {
             </p>
           </div>
           <div>
-            <p className="text-white/70">Launch Date:</p>
-            <p className="text-lg font-semibold">
-              {new Date(coin.genesis_date).toLocaleDateString()}
-            </p>
-          </div>
-          <div>
             <p className="text-white/70">Watchlist Users:</p>
             <p className="text-lg font-semibold">
               {numeral(coin.watchlist_portfolio_users).format("0,0")}
@@ -153,6 +147,12 @@ export const Crypto = () => {
           <div>
             <p className="text-white/70">Market Rank:</p>
             <p className="text-lg font-semibold">{coin.market_cap_rank}</p>
+          </div>
+          <div>
+            <p className="text-white/70">Sentiments Votes Up:</p>
+            <p className="text-lg font-semibold">
+              {coin.sentiment_votes_up_percentage}%
+            </p>
           </div>
         </div>
       </div>
