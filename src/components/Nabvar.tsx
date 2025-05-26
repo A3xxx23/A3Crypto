@@ -2,14 +2,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Auth from "./Auth";
 import { IconMenu2, IconX } from "@tabler/icons-react";
-
-
-const navbarLinks = [
-  { id: 1, title: 'Home', href: '/' },
-  { id: 2, title: 'Calculator', href: '/calculator' },
-  { id: 3, title: 'Trending', href: '/trending' },
-  { id: 4, title: 'News', href: '/news' },
-];
+import { navbarLinks } from "../constants/links";
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -54,13 +47,13 @@ export const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-white bg-opacity-95 flex flex-col items-center justify-center space-y-6 text-xl z-40">
+        <div className="fixed inset-0 bg-black bg-opacity-95 flex flex-col items-center justify-center space-y-6 text-xl z-40">
         <Link to="/" className="flex justify-items-center py-4 ">
           <img src="/src/assets/Image/LogoHero.png" alt="Logo crypto" className="h-26" />
         </Link>
 
         <button
-        className="absolute top-8 right-5 text-black"
+        className="absolute top-8 right-5 text-white"
         onClick={() => setMenuOpen(false)}
        >
        <IconX size={28} />
@@ -70,13 +63,13 @@ export const Navbar = () => {
             <NavLink
               key={link.id}
               to={link.href}
-              className="text-black font-semibold transition hover:text-gray-600"
+              className="text-white font-semibold transition hover:text-gray-600"
               onClick={() => setMenuOpen(false)}
             >
               {link.title}
             </NavLink>
           ))}
-          <div className="text-black font-semibold transition-all duration-300 hover:text-gray-700">
+          <div className="text-white font-semibold transition-all duration-300 hover:text-gray-700">
             <Auth />
           </div>
         </div>

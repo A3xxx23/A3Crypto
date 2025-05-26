@@ -3,10 +3,9 @@ import { SocialLinks } from "../constants/links";
 export const Footer = () => {
     return (
         <div className="flex justify-center items-center w-full text-white">
-        <footer className="text-center flex items-center text-white py-2">
-            <div className="flex flex-col items-center justify-center w-full">
-            <p>&copy; {new Date().getFullYear()} | created by Angel Aquino</p>
-            <div className="flex gap-2">
+            <footer className="text-center flex flex-col items-center w-full py-4"> 
+                <p>&copy; {new Date().getFullYear()} | created by Angel Aquino</p>
+                <div className="flex gap-0 justify-center">
                     {SocialLinks.map((link) => (
                         <a 
                             key={link.id} 
@@ -19,10 +18,7 @@ export const Footer = () => {
                         </a>
                     ))}
                 </div>
-            
-            </div>
-
-        </footer>
+            </footer>
         </div>
     );
 }

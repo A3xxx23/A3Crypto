@@ -26,3 +26,10 @@ export const SocialLinks = [
         icon: IconMail,
     },
 ];
+
+export const navbarLinks = [
+    { id: 1, title: 'Home', href: '/' },
+    { id: 2, title: 'Calculator', href: '/calculator' },
+    { id: 3, title: 'Trending', href: '/trending' },
+    { id: 4, title: 'News', href: '/news' },
+  ];
