@@ -76,34 +76,34 @@ export const Table = ({ searchTerm }: Props) => {
   if (coins.length === 0) return <Loader />;
 
   return (
-    <table className="mt-12 w-full max-w-xl mx-auto border border-white/10 bg-white/5 rounded-lg overflow-hidden transition-shadow duration-300">
+    <table className="mt-12 w-full sm:w-full max-w-full mx-auto border border-white/10 bg-white/5 rounded-lg overflow-hidden transition-shadow duration-300">
       <thead className="rounded-t-lg">
         <tr className="text-center">
-          <th className="px-4 py-2">Cryptocurrency</th>
-          <th className="px-4 py-2">Price</th>
-          <th className="px-4 py-2">Market Cap</th>
-          <th className="px-4 py-2">24h Change</th>
+          <th className="px-2 py-2">Cryptocurrency</th>
+          <th className="px-2 py-2">Price</th>
+          <th className="px-2 py-2">Market Cap</th>
+          <th className="px-2 py-2">24h Change</th>
         </tr>
       </thead>
       <tbody>
         {filteredCoins.slice(0, 10).map((coin) => (
           <tr key={coin.id} className="text-white text-center hover:bg-white/15 cursor-pointer" onClick={() => handleSlugClick(coin.id)}>
-            <td className="px-4 py-2 flex items-center text-center gap-2">
-              <img src={coin.image} alt={coin.name} className="w-6 h-6" />
+            <td className="px-2 py-2 flex items-center text-center gap-2">
+              <img src={coin.image} alt={coin.name} className="w-6 h-6 max-w-full" />
               <span className="overflow-hidden whitespace-nowrap text-ellipsis max-w-[150px]">
                 {coin.name} ({coin.symbol.toUpperCase()})
               </span>
             </td>
-            <td className="px-4 py-2">${numeral(coin.current_price).format("0,0.00")}</td>
-            <td className="px-4 py-2">${numeral(coin.market_cap).format("0.00a")}</td>
-            <td className={`px-4 py-2 ${coin.price_change_percentage_24h >= 0 ? "text-green-400" : "text-red-400"}`}>
+            <td className="px-2 py-2">${numeral(coin.current_price).format("0,0.00")}</td>
+            <td className="px-2 py-2">${numeral(coin.market_cap).format("0.00a")}</td>
+            <td className={`px-2 py-2 ${coin.price_change_percentage_24h >= 0 ? "text-green-400" : "text-red-400"}`}>
               {coin.price_change_percentage_24h?.toFixed(2)}%
             </td>
           </tr>
         ))}
       </tbody>
     </table>
-  );
+);
 };
 
 export default Table;
