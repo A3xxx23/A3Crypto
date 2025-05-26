@@ -6,6 +6,7 @@ import Trending from "./pages/Trending";
 import News from "./pages/News";
 import Nabvar from "./components/Nabvar";
 import Crypto from "./components/Crypto";
+import { Footer } from "./components/Footer";
 
 export const App = () => {
   return (
@@ -21,6 +22,8 @@ export const App = () => {
         <Route path="/crypto/:id" element={<Crypto/>} />
       </Routes>
     </main>
+
+    <Footer/>
   </div>
   );
 }
