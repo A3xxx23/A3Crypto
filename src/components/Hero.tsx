@@ -17,7 +17,7 @@ export const Hero = () => {
           alt="Logo Crypto"
           className="mb-4 h-26"
         />
-        <h1 className="text-4xl sm:text-6xl tracking-tight max-w-4xl animate-fade-in animate-delay-200 font-bold text-center animate-text-gradient inline-flex bg-gradient-to-r from-neutral-100 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight text-transparent dark:via-slate-400 dark:to-neutral-400">
+        <h1 className="text-4xl sm:text-6xl tracking-tight max-w-4xl animate-fade-in animate-delay-200 font-bold text-center animate-text-gradient inline-flex bg-gradient-to-r from-neutral-100 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight text-transparent dark:via-slate-700 dark:to-gray-700">
         Welcome to the Best Place to Track Your Cryptocurrencies!
         </h1>
 
