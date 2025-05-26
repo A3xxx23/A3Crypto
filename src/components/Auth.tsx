@@ -45,7 +45,7 @@ export const Auth = () => {
           className="rounded-full border border-white/10 flex justify-center items-center gap-x-2 py-2 px-4
           bg-white/5 hover:scale-110 hover:bg-white/10 hover:shadow-lg transition-all duration-300 ease-in-out"
         >
-          sign out
+          Sign Out
         </button>
       ) : (
         <button
@@ -53,7 +53,7 @@ export const Auth = () => {
           className="rounded-full border border-white/10 flex justify-center items-center gap-x-2 py-2 px-4
           bg-white/5 hover:scale-110 hover:bg-white/10 hover:shadow-lg transition-all duration-300 ease-in-out"
         >
-          sign in
+          Sign In
         </button>
       )}
     </div>
