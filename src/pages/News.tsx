@@ -16,7 +16,7 @@ export const News = () => {
   const fetchNewsCoins = useCallback(async () => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=cryptocurrency&apiKey=${import.meta.env.VITE_NEW_API_KEY}`
+        `https://newsapi.org/v2/everything?q=cryptocurrency&apiKey=728c5e5e59be443d9ded6165d2e012bc`
       );
       const data = await response.json();
   

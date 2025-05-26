@@ -11,7 +11,7 @@ export const Navbar = () => {
     <header className="w-full py-4 px-6 lg:px-1 text-white shadow-lg relative z-50">
       <div className="flex items-center justify-between">
         <Link to="/" className="flex-shrink-0 ">
-          <img src="/src/assets/Image/LogoHero.png" alt="Logo crypto" className="h-16" />
+          <img src="src/assets/Image/LogoHero.png" alt="Logo crypto" className="h-16" />
         </Link>
 
         {/* Desktop Links */}
