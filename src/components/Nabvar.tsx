@@ -69,7 +69,7 @@ export const Navbar = () => {
               {link.title}
             </NavLink>
           ))}
-          <div className="text-white font-semibold transition-all duration-300 hover:text-gray-700">
+          <div className="text-white font-semibold transition-all duration-300 ease-in-out">
             <Auth />
           </div>
         </div>

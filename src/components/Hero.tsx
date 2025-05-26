@@ -27,7 +27,9 @@ export const Hero = () => {
         <div className="flex items-center justify-center mt-10 w-full">
             <div className="relative w-full max-w-xl mx-auto">
                 <input
+                    id={searchTerm}
                     type="text"
+                    name="search"
                     value={searchTerm}
                     onChange={handleSearch}
                     placeholder="Search crypto..."
