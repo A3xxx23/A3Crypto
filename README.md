@@ -1,54 +1,53 @@
-# React + TypeScript + Vite
+# ![Home Page](</A3Crypto/assets/Image/LogoCoin.png>) A3CryptoPlace
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A real-time web application built with **React**, **TypeScript**, **Zustand**, **Chart.js**, and **TailwindCSS** that allows you to view detailed cryptocurrency information using the [CoinGecko](https://www.coingecko.com/) API.
 
-Currently, two official plugins are available:
+The app has a data loading issue because the CoinGecko API is in the free phase and has a query limit per minute and hour.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🔍 Cryptocurrency search by name or symbol
+- 📈 Interactive price charts (1D, 7D, 30D, etc.)
+- 💰 Real-time information: price, market cap, 24-hour change, ranking, news, etc.
+- 📊 Chart with Chart.js to analyze price trends
+- ⚙️ Global state management with Zustand
+- 📦 Integration with TailwindCSS for a modern and responsive design
+- 🚀 Deployment in Vercel
+- Login with Google Auth for authentication (optional)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Technologies used
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- React + TypeScript
+- Zustand (state management)
+- Chart.js (charts)
+- TailwindCSS (styles)
+- CoinGecko API
+- Host in Vercel
+- React Router DOM
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 📸 Screenshots
+
+---
+
+## 🌐 Demo
+
+[🔗 View online demo](https://tudemo.netlify.app)
+
+---
+
+## 📦 Facility
+
+```bash
+
+git clone https://github.com/A3xxx23/A3Crypto/
+cd A3Crypto
+
+npm install
+
+npm run dev
