@@ -41,7 +41,7 @@ export const News = () => {
   const fetchNewsCoins = useCallback(async () => {
     try {
       const response = await fetch(
-        `https://newsdata.io/api/1/latest?apikey=${import.meta.env.VITE_NEWS_API_KEY}&q=crypto&country=us&language=en,es,zh,ru,jp`
+        `https://newsdata.io/api/1/latest?apikey=${import.meta.env.VITE_NEW_API_KEY}&q=crypto&country=us&language=en,es,zh,ru,jp`
       );
 
       if (!response.ok) {
