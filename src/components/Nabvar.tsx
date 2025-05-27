@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import Auth from "./Auth";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { navbarLinks } from "../constants/links";
+import LogoHero from '../assets/Image/LogoHero.png'
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,7 +12,7 @@ export const Navbar = () => {
     <header className="w-full py-4 px-6 lg:px-1 text-white shadow-lg relative z-50">
       <div className="flex items-center justify-between">
         <Link to="/" className="flex-shrink-0 ">
-          <img src="src/assets/Image/LogoHero.png" alt="Logo crypto" className="h-16" />
+          <img src={LogoHero} alt="Logo crypto" className="h-16" />
         </Link>
 
         {/* Desktop Links */}

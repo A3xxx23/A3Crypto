@@ -1,6 +1,7 @@
 import { IconSearch } from "@tabler/icons-react";
 import Table from "./Table";
 import { useState } from "react";
+import LogoCoin from '../assets/Image/LogoCoin.png'
 
 export const Hero = () => {
 
@@ -13,7 +14,7 @@ export const Hero = () => {
   return (
     <main className="flex-1 flex flex-col items-center justify-center text-center px-4 py-10">
     <img
-          src="src/assets/Image/LogoCoin.png"
+          src={LogoCoin}
           alt="Logo Crypto"
           className="mb-4 h-26"
         />

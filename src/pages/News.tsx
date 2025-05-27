@@ -1,46 +1,77 @@
-import { useCallback ,useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
-import { useNewStore } from '../store/useNewStore'
+import { useNewStore } from "../store/useNewStore";
+
+interface Article {
+  article_id?: string;
+  title: string;
+  link: string;
+  creator?: string[];
+  pubDate: string;
+  source_name?: string;
+  image_url: string;
+  category?: string[];
+}
+
+interface FormattedNewsItem {
+  id: number;
+  title: string;
+  url: string;
+  author: string;
+  publishedAt: string;
+  source: {
+    name: string;
+  };
+  urlToImage: string;
+  currencies: { code: string }[];
+}
 
 export const News = () => {
   const { news, setNews, lastUpdated, setLastUpdated } = useNewStore();
   const [loading, setLoading] = useState(news.length === 0);
 
+  const placeholderImage = "https://ui.shadcn.com/placeholder.svg"; 
   const shouldUpdate = useCallback(() => {
     const TEN_MINUTES = 10 * 60 * 1000;
     if (!lastUpdated) return true;
     return Date.now() - lastUpdated > TEN_MINUTES;
   }, [lastUpdated]);
-  
+
   const fetchNewsCoins = useCallback(async () => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=cryptocurrency&apiKey=728c5e5e59be443d9ded6165d2e012bc`
+        `https://newsdata.io/api/1/latest?apikey=${import.meta.env.VITE_NEWS_API_KEY}&q=crypto&country=us&language=en,es,zh,ru,jp`
       );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const data = await response.json();
-  
-      const formattedNews = data.articles
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .filter((article: any) => article.urlToImage)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .map((article: any, index: number) => ({
-          id: index.toString(),
-          title: article.title,
-          url: article.url,
-          author: article.author,
-          publishedAt: article.publishedAt,
-          source: {
-            name: article.source.name,
-          },
-          urlToImage: article.urlToImage,
-        }));
-  
+
+      if (!data.results || data.results.length === 0) {
+        throw new Error("No news articles found");
+      }
+
+      const formattedNews: FormattedNewsItem[] = data.results.map((article: Article, index: number) => ({
+        id: article.article_id ? parseInt(article.article_id, 10) : index,
+        title: article.title,
+        url: article.link,
+        author: article.creator?.[0] || "Unknown",
+        publishedAt: article.pubDate,
+        source: {
+          name: article.source_name || "Unknown Source",
+        },
+        urlToImage: article.image_url || placeholderImage, 
+        currencies: article.category?.map((cat) => ({ code: cat })) || [],
+      }));
+
       setNews(formattedNews);
       setLastUpdated(Date.now());
     } catch (error) {
       console.error("Error fetching news:", error);
-      toast.error("Error fetching news", {
+      toast.error(`Error fetching news: ${(error as Error).message}`, {
         position: "bottom-right",
         duration: 2000,
         style: { background: "#1F2937", color: "#F9FAFB" },
@@ -48,8 +79,7 @@ export const News = () => {
     } finally {
       setLoading(false);
     }
-  }, [setNews, setLastUpdated]);
-  
+  }, [setNews, setLastUpdated, placeholderImage]); 
 
   useEffect(() => {
     if (shouldUpdate()) {
@@ -57,14 +87,12 @@ export const News = () => {
     } else {
       setLoading(false);
     }
-  
+
     const intervalId = setInterval(fetchNewsCoins, 600000);
     return () => clearInterval(intervalId);
   }, [fetchNewsCoins, shouldUpdate]);
 
   if (loading) return <Loader />;
-
-  const placeholderImage = "https://ui.shadcn.com/placeholder.svg";
 
   return (
     <div className="container mx-auto max-w-7xl p-4">
@@ -77,7 +105,7 @@ export const News = () => {
             onClick={() => window.open(item.url, "_blank")}
           >
             <img
-              src={item.urlToImage || placeholderImage}
+              src={item.urlToImage}
               alt={item.title}
               className="h-48 w-full object-cover rounded-t-lg mb-4"
               onError={(e) => {
@@ -90,7 +118,7 @@ export const News = () => {
               rel="noopener noreferrer"
               className="text-lg font-semibold text-white cursor-pointer"
             >
-              {item.title}
+              {item.title} 
             </a>
 
             <p className="text-md text-gray-500 mt-2 mb-4">
@@ -98,8 +126,8 @@ export const News = () => {
               {new Date(item.publishedAt).toLocaleDateString()}
             </p>
 
-            <span className="text-md text-gray-500 mt-2 mb-4 ">
-              {item.author ? `by ${item.author}` : "by Unknown"}
+            <span className="text-md text-gray-500 mt-2 mb-4">
+              {item.author ? `by ${item.author.length > 50 ? `${item.author.slice(0, 50)}...` : item.author}` : "by Unknown"}
             </span>
 
             <div className="flex flex-wrap gap-2 mt-3">
