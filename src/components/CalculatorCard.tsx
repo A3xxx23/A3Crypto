@@ -65,47 +65,54 @@ export const CalculatorCard = () => {
     }, [fetchCoin]); 
 
     useEffect(() => {
-        if (crypto) {
-            const fetchCryptoPrice = async () => {
-                try {
-                    const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${crypto.value}&vs_currencies=usd&include_last_updated_at=true`);
-                    const data = await response.json();
-                    const price = data[crypto.value]?.usd;
-                    const updateTime = data[crypto.value]?.last_updated_at;
+    if (crypto && fiat) {
+        const fetchCryptoPrice = async () => {
+            try {
+                const response = await fetch(
+                    `https://api.coingecko.com/api/v3/simple/price?ids=${crypto.value}&vs_currencies=${fiat.value}&include_last_updated_at=true`
+                );
+                const data = await response.json();
+                const price = data[crypto.value]?.[fiat.value];
+                const updateTime = data[crypto.value]?.last_updated_at;
 
-                    if (price) {
-                        setCryptoPrice(price);
-                        if (updateTime) {
-                            const date = new Date(updateTime * 1000);
-                            setLastUpdate(date.toLocaleString());
-                        }
-                    } else {
-                        toast.error('Error fetching crypto price', { position: 'bottom-right', duration: 3000 });
+                if (price) {
+                    setCryptoPrice(price);
+                    if (updateTime) {
+                        const date = new Date(updateTime * 1000);
+                        setLastUpdate(date.toLocaleString());
                     }
-                } catch (error) {
-                    console.error(error);
-                    toast.error('Error fetching crypto price', { position: 'bottom-right', duration: 3000 });
+                } else {
+                    toast.error("Error fetching crypto price", {
+                        position: "bottom-right",
+                        duration: 3000,
+                    });
                 }
-            };
+            } catch (error) {
+                console.error(error);
+                toast.error("Error fetching crypto price", {
+                    position: "bottom-right",
+                    duration: 3000,
+                });
+            }
+        };
 
-            fetchCryptoPrice();
+        fetchCryptoPrice();
 
-            const intervalId = setInterval(fetchCryptoPrice, 600000); // Actualiza cada 10 minutos
+        const intervalId = setInterval(fetchCryptoPrice, 600000); // Actualiza cada 10 minutos
 
-            return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
-        }
-    }, [crypto, setCryptoPrice, setLastUpdate]); 
+        return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
+    }
+}, [crypto, fiat, setCryptoPrice, setLastUpdate]);
 
-    useEffect(() => {
-        const numericAmount = parseFloat(amount as string);
-        if (!isNaN(numericAmount) && numericAmount > 0 && fiat && cryptoPrice) {
-            const result = numericAmount * cryptoPrice;
-            setConverted(result);
-            toast.success(`Converted to ${fiat.label}`, { position: 'bottom-right', duration: 3000 });
-        } else {
-            setConverted(null); // Reset converted value if amount is invalid
-        }
-    }, [amount, fiat, cryptoPrice, setConverted]); // Agregar setConverted como dependencia
+useEffect(() => {
+    const numericAmount = parseFloat(amount as string);
+    if (!isNaN(numericAmount) && numericAmount > 0 && fiat && cryptoPrice) {
+        const result = numericAmount * cryptoPrice;
+        setConverted(result);
+    } else {
+        setConverted(null); 
+    }
+}, [amount, fiat, cryptoPrice, setConverted]);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const customSingleValue = ({ data }: any) => (
@@ -241,4 +248,55 @@ export const CalculatorCard = () => {
     );
 };
 
-export default CalculatorCard;
+export default CalculatorCard; 
+
+/*useEffect(() => {
+        if (crypto) {
+            const fetchCryptoPrice = async () => {
+                try {
+                    const response = await fetch(
+                        `https://api.coingecko.com/api/v3/simple/price?ids=${crypto.value}&vs_currencies=${fiat?.value || "usd"}&include_last_updated_at=true`
+                    );
+                    const data = await response.json();
+                    const price = data[crypto.value]?.[fiat?.value || "usd"];
+                    const updateTime = data[crypto.value]?.last_updated_at;
+    
+                    if (price) {
+                        setCryptoPrice(price);
+                        if (updateTime) {
+                            const date = new Date(updateTime * 1000);
+                            setLastUpdate(date.toLocaleString());
+                        }
+                    } else {
+                        toast.error("Error fetching crypto price", {
+                            position: "bottom-right",
+                            duration: 3000,
+                        });
+                    }
+                } catch (error) {
+                    console.error(error);
+                    toast.error("Error fetching crypto price", {
+                        position: "bottom-right",
+                        duration: 3000,
+                    });
+                }
+            };
+    
+            fetchCryptoPrice();
+    
+            const intervalId = setInterval(fetchCryptoPrice, 600000); // Actualiza cada 10 minutos
+    
+            return () => clearInterval(intervalId); // Limpia el intervalo al desmontar el componente
+        }
+    }, [crypto, fiat, setCryptoPrice, setLastUpdate]); 
+
+    useEffect(() => {
+        const numericAmount = parseFloat(amount as string);
+        if (!isNaN(numericAmount) && numericAmount > 0 && fiat && cryptoPrice) {
+            const result = numericAmount * cryptoPrice;
+            setConverted(result);
+            toast.success(`Converted to ${fiat.label}`, { position: 'bottom-right', duration: 3000 });
+        } else {
+            setConverted(null); // Reset converted value if amount is invalid
+        }
+    }, [amount, fiat, cryptoPrice, setConverted]); // Agregar setConverted como dependencia */
