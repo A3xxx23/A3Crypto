@@ -25,9 +25,10 @@ The app has a data loading issue because the CoinGecko API is in the free phase 
 
 - React + TypeScript
 - Zustand (state management)
-- Chart.js (charts)
-- TailwindCSS (styles)
+- Chart.js 
+- TailwindCSS 
 - CoinGecko API
+- NewsData.io API
 - Host in Vercel
 - React Router DOM
 
