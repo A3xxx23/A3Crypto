@@ -167,35 +167,35 @@ export const Crypto = () => {
 
       {/* Gráfico */}
       <div className="bg-white/5 rounded-lg p-6">
-        <div className="flex gap-4 mb-4">
-          {rangeButtons.map((btn) => (
-            <button
-              key={btn.value}
-              className={`px-4 py-1 rounded-full border ${
-                btn.value === days
-                  ? "bg-blue-600 border-blue-500"
-                  : "bg-transparent border-white/20"
-              } transition`}
-              onClick={() => setDays(btn.value)}
-            >
-              {btn.label}
-            </button>
-          ))}
-        </div>
-        {loadingChart ? (
-          <Loader />
-        ) : (
-          <Line
-            data={chartOptions}
-            options={{
-              responsive: true,
-              plugins: {
-                legend: { display: false },
-              },
-            }}
-          />
-        )}
-      </div>
+  <div className="flex gap-2 overflow-x-auto mb-4 whitespace-nowrap">
+    {rangeButtons.map((btn) => (
+      <button
+        key={btn.value}
+        className={`px-4 py-1 rounded-full border ${
+          btn.value === days
+            ? "bg-blue-600 border-blue-500"
+            : "bg-transparent border-white/20"
+        } transition`}
+        onClick={() => setDays(btn.value)}
+      >
+        {btn.label}
+      </button>
+    ))}
+  </div>
+  {loadingChart ? (
+    <Loader />
+  ) : (
+    <Line
+      data={chartOptions}
+      options={{
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+        },
+      }}
+    />
+  )}
+</div>
     </div>
   );
 };
