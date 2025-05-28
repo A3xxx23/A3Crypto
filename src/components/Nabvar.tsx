@@ -50,7 +50,7 @@ export const Navbar = () => {
       {menuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-95 flex flex-col items-center justify-center space-y-6 text-xl z-40">
         <Link to="/" className="flex justify-items-center py-4 ">
-          <img src="/src/assets/Image/LogoHero.png" alt="Logo crypto" className="h-26" />
+          <img src={LogoHero} alt="Logo crypto" className="h-26" />
         </Link>
 
         <button
