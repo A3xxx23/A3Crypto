@@ -26,7 +26,7 @@ export const Hero = () => {
 
           {/* Search Bar */} 
         <div className="flex items-center justify-center mt-10 w-full">
-            <div className="relative w-full max-w-lg mx-auto">
+            <div className="relative w-full max-w-lg sm:max-w-md sm:mx-auto mx-auto">
                 <input
                     id={searchTerm}
                     type="text"
